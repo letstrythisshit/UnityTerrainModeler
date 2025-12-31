@@ -141,29 +141,29 @@ namespace UnityTerrainModeler.Runtime
         {
             switch (modelerSettings.geologicalType)
             {
-                case TerrainModelerSettings.GeologicalType.Volcanic:
+                case GeologicalType.Volcanic:
                     float distance = Mathf.Sqrt(Mathf.Pow(u - 0.5f, 2f) + Mathf.Pow(v - 0.5f, 2f));
                     float peak = Mathf.Clamp01(1f - distance * 1.8f);
                     float crater = Mathf.SmoothStep(0.2f, 0.8f, distance * 2.2f);
                     height += peak * 0.25f;
                     height -= crater * 0.15f;
                     break;
-                case TerrainModelerSettings.GeologicalType.Sedimentary:
+                case GeologicalType.Sedimentary:
                     float steps = 8f;
                     height = Mathf.Round(height * steps) / steps;
                     break;
-                case TerrainModelerSettings.GeologicalType.Granite:
+                case GeologicalType.Granite:
                     height = Mathf.Pow(height, 0.85f);
                     break;
-                case TerrainModelerSettings.GeologicalType.Karst:
+                case GeologicalType.Karst:
                     float sinkholes = Mathf.PerlinNoise(u * 6f, v * 6f);
                     height -= sinkholes * 0.15f;
                     break;
-                case TerrainModelerSettings.GeologicalType.Canyon:
+                case GeologicalType.Canyon:
                     float canyon = Mathf.PerlinNoise(u * 3f, v * 3f);
                     height = Mathf.Lerp(height, height * canyon, 0.6f);
                     break;
-                case TerrainModelerSettings.GeologicalType.Archipelago:
+                case GeologicalType.Archipelago:
                     float islands = Mathf.PerlinNoise(u * 4f, v * 4f);
                     height *= Mathf.Lerp(0.4f, 1f, islands);
                     break;
